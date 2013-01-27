@@ -4,12 +4,12 @@ body {
   font-family: sans-serif;
   background: #f0f0f0 url('/assets/img/bg_debut_light.png') 0 0 repeat;
   min-width:1200px;
+  padding-top:180px;
 
 }
 h1 {
   font-family: 'Fjalla One', sans-serif;
 }
-
 h2{
   font-family: 'Fjalla One', sans-serif;
   font-size: 36px;
@@ -29,11 +29,17 @@ h3{
 
 /* top */
 header {
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
   padding:5px;
-  overflow:hidden;
   margin-top: 25px;
   border-top: 10px solid black;
   border-bottom: 10px solid black;
+  background: rgba(255, 255, 255, 0.8);
+  overflow: hidden;
+  z-index:5;
 }
 header h1 {
   float:left;
@@ -249,6 +255,7 @@ header nav .q {
   margin-top:25px;
   margin-bottom:80px;
   margin-left:120px;
+  position: relative;
 }
 
 #main.permalink .actions {
@@ -263,8 +270,8 @@ header nav .q {
   width: 550px;
   float: left;
 }
-#main.permalink article .info{
-  width: 600px;
+#main.permalink article .info {
+  width: 400px;
   float: left;
   position: relative;
 }
@@ -282,7 +289,7 @@ header nav .q {
   font-size: 24px;
   float: right;
   position: absolute;
-  left: 450px;
+  left: 375px;
   top: 120px;
 }
 
@@ -295,7 +302,7 @@ header nav .q {
 #chart_div{
   width:200px;
   height:200px;
-  margin: 30px 0px 20px 200px;
+  margin: 30px 0px 20px 100px;
 }
 
 .empty_chart {
@@ -353,7 +360,7 @@ header nav .q {
 footer {
   position:fixed;
   bottom:0;
-  padding:10px;
+  padding:10px 0;
   width:100%;
   border-top: 10px solid black;
   border-bottom: 10px solid black;
