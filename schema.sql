@@ -1,12 +1,9 @@
-CREATE DATABASE videowars;
-USE videowars;
-
 -- phpMyAdmin SQL Dump
 -- version 3.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 27, 2013 at 02:14 AM
+-- Generation Time: Jan 27, 2013 at 05:24 AM
 -- Server version: 5.5.25
 -- PHP Version: 5.4.4
 
@@ -121,7 +118,28 @@ CREATE TABLE `views` (
   `video_id` int(10) unsigned NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+
+--
+-- Dumping data for table `views`
+--
+
+INSERT INTO `views` (`id`, `video_id`, `timestamp`) VALUES
+(1, 1, '2013-01-27 03:52:39'),
+(2, 2, '2013-01-27 03:52:39'),
+(3, 3, '2013-01-27 03:52:39'),
+(4, 4, '2013-01-27 03:52:39'),
+(5, 5, '2013-01-27 03:52:39'),
+(6, 6, '2013-01-27 03:52:39'),
+(7, 7, '2013-01-27 03:52:39'),
+(8, 8, '2013-01-27 03:52:39'),
+(9, 9, '2013-01-27 03:52:39'),
+(10, 10, '2013-01-27 03:52:39'),
+(11, 11, '2013-01-27 03:52:39'),
+(12, 12, '2013-01-27 03:52:39'),
+(13, 13, '2013-01-27 03:52:39'),
+(14, 14, '2013-01-27 03:52:39'),
+(15, 3, '2013-01-27 03:52:47');
 
 -- --------------------------------------------------------
 
@@ -135,5 +153,19 @@ CREATE TABLE `votes` (
   `lose_video_id` int(10) unsigned NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
+--
+-- Dumping data for table `votes`
+--
+
+INSERT INTO `votes` (`id`, `win_video_id`, `lose_video_id`, `timestamp`) VALUES
+(1, 1, 2, '2013-01-27 02:42:59'),
+(2, 1, 3, '2013-01-27 02:42:59'),
+(3, 1, 4, '2013-01-27 02:42:59'),
+(4, 2, 3, '2013-01-27 02:42:59'),
+(5, 2, 4, '2013-01-27 02:42:59'),
+(6, 2, 5, '2013-01-27 02:42:59'),
+(7, 3, 7, '2013-01-27 02:42:59'),
+(8, 7, 1, '2013-01-27 04:04:06'),
+(9, 8, 1, '2013-01-27 04:04:06');
