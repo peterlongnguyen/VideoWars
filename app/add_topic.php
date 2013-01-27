@@ -16,13 +16,13 @@
   <?php include('nav.php'); ?>
 </header>
 
-<div id="main">
+<div id="main" class="add_form">
+<h1>Add topic</h1>
 <?php
 
 require_once("config.php");
 require_once("db.php");
 
-echo "Add topic<br /><br />";
 
 $categories = db_fetch("SELECT id, name FROM categories ORDER BY name");
 
@@ -33,7 +33,8 @@ Keyword: <input type="text" name="keyword">
 <br />
 <br />
 
-<a href="#">Advanced Options...</a>
+<a href="#" id="show_advanced">Advanced Options...</a>
+<div id="advanced">
 <br /><br />
 
 Battle Name: <input type="text" name="name">
@@ -69,8 +70,9 @@ Allow Additions<br />
 Allow Leaderboard<br />
 <input type="radio" name="leaderboard" value="1" checked>Yes<br >
 <input type="radio" name="leaderboard" value="0">No
-<br /><br />
 
+</div>
+<br /><br />
 <input type="submit" value="Submit">
 </form>
 </div>
@@ -78,6 +80,13 @@ Allow Leaderboard<br />
   +
 </footer>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+  $('#show_advanced').bind('click', function() {
+    $('#advanced').slideDown();
+  });
+});
+</script>
 </body>
 </html>
 
