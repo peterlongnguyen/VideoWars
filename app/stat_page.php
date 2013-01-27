@@ -8,7 +8,6 @@ $video_id = $_GET["video_id"];
 
 // video stat page
 $video = db_fetch("SELECT * FROM videos WHERE id = ?", array($video_id), True);
-echo "<pre>"; print_r($video); echo "</pre>";
 
 $wins = db_fetch("SELECT COUNT(*) AS wins FROM votes WHERE win_video_id = ?", array($video_id), True);
 $losses = db_fetch("SELECT COUNT(*) AS losses FROM votes WHERE lose_video_id = ?", array($video_id), True);
@@ -38,12 +37,6 @@ foreach ($merged as $key => $value) {
     $sorted[$key] = $value['timestamp'];
 }
 array_multisort($sorted, SORT_DESC, $merged);
-
-// echo("<b>Battle Wins for video: </b>" . $video_id);
-foreach ($merged as $key => $value) {
-	// echo("<br />");
-	// echo "<pre>"; print_r($merged[$key]); echo "</pre>";
-}
 
 $all_topics = db_fetch("SELECT COUNT(topics.id) AS count, topics.id, topics.name FROM topics JOIN videos ON videos.topic_id = topics.id GROUP BY topics.id");
 
@@ -77,20 +70,62 @@ $all_topics = db_fetch("SELECT COUNT(topics.id) AS count, topics.id, topics.name
 </header>
 <div id="main" class="permalink">
   <article>
-    <h1><?php echo $video['name'] ?></h1>
     <div class="video">
       <iframe width="550" height="350" src="http://www.youtube.com/embed/<?php echo $video['youtube_id']; ?>" frameborder="0" allowfullscreen></iframe>
+      <ul class="actions">
+        <li class="twitter"> <a href="#" title="Twitter"><i class="icon-twitter"></i></a></li>
+        <li class="facebook"> <a href="#" title="Facebook"><i class="icon-facebook-sign"></i></a></li>
+        <li class="fave"> <a href="#" title="Favorite"><i class="icon-heart-empty"></i></a></li>
+        <li class="link"> <a href="<?php echo $video['permalink_url'] ?>" title="Permalink"><i class="icon-link"></i></a></li>
+        <li class="flag"> <a href="#" title="Flag as Inappropriate"><i class="icon-flag"></i></a></li>
+      </ul>
     </div>
-    <ul class="actions">
-      <li class="twitter"> <a href="#" title="Twitter"><i class="icon-twitter"></i></a></li>
-      <li class="facebook"> <a href="#" title="Facebook"><i class="icon-facebook-sign"></i></a></li>
-      <li class="fave"> <a href="#" title="Favorite"><i class="icon-heart-empty"></i></a></li>
-      <li class="link"> <a href="<?php echo $video['permalink_url'] ?>" title="Permalink"><i class="icon-link"></i></a></li>
-      <li class="flag"> <a href="#" title="Flag as Inappropriate"><i class="icon-flag"></i></a></li>
-    </ul>
+    <div class="info">
+      <h1><?php echo $video['name'] ?></h1>
+      <div id="chart_div"></div>
+      <div id="total_score"><strong><?php echo $total_score ?></strong><br>Total Score</div>
+    </div>
   </article>
-  <div id="chart_div" style="width: 200px; height: 200px;"></div>
-  <div id="total_score"><?php echo $total_score ?></div>
+    <section class="records">
+      <h1>Records</h1>
+      <table>
+        <tr>
+          <th> outcome </th>
+          <th> opponent</th>
+          <th> date </th>
+        </tr>
+<?php
+foreach ($merged as $value) {
+?>
+        <tr>
+<?php
+  if ($value['win_video_id'] == $video_id) {
+?>
+          <td class="win"> WIN </td>
+<?php
+  } else {
+?>
+          <td class="lose"> LOSER </td>
+<?php
+  }
+?>
+          <td>
+            <?php if ($value['win_video_id'] == $video_id) { ?>
+              <a href="stat_page.php?video_id=<?php echo $value['lose_video_id']; ?>">
+            <?php } else { ?>
+              <a href="stat_page.php?video_id=<?php echo $value['win_video_id']; ?>">
+            <?php } ?>
+              <img class="thumb" src="http://i4.ytimg.com/vi/<?php echo $value['youtube_id'] ?>/mqdefault.jpg" alt="">
+            </a>
+          </td>
+          <td><?php echo $value['timestamp']; ?></td>
+        </tr>
+<?php
+}
+?>
+      </table>
+    </div>
+  </section>
 </div>
 
 
@@ -102,11 +137,13 @@ $all_topics = db_fetch("SELECT COUNT(topics.id) AS count, topics.id, topics.name
 <script type="text/javascript">
   google.load("visualization", "1", {packages:["corechart"]});
   google.setOnLoadCallback(drawChart);
+  var wins =  <?php echo count($wins); ?>;
+  var losses =  <?php echo count($losses); ?>;
   function drawChart() {
     var data = google.visualization.arrayToDataTable([
       ['Decision', 'Quantity'],
-      ['WINS', <?php echo count($wins); ?>],
-      ['LOSSES', <?php echo count($losses); ?>],
+      ['WINS', wins],
+      ['LOSSES', losses],
     ]);
 
     var options = {
@@ -119,8 +156,15 @@ $all_topics = db_fetch("SELECT COUNT(topics.id) AS count, topics.id, topics.name
       height: 200,
       backgroundColor: 'none'
     };
-    var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-    chart.draw(data, options);
+    var fake_chart = function() {
+      $('#chart_div').html('<div class="empty_chart"></div>')
+    }
+    if (wins + losses > 0) {
+      var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    } else {
+      fake_chart();
+    }
   }
 </script>
 </body>
