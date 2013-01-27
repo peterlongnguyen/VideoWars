@@ -69,7 +69,7 @@ if (array_key_exists("topic", $_GET) && is_numeric($_GET["topic"])) {
 <body>
 <header>
   <h1><a href="/"><img src="assets/img/video_wars_logo.png"></a></h1>
-  <h2><?php echo $topic['name']; ?></h2>
+  <h2><a href="leaderboard.php?topic=<?php echo $topic['id'];?>"><?php echo $topic['name']; ?></a></h2>
   <?php include('nav.php'); ?>
 </header>
 

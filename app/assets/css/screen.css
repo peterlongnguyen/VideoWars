@@ -61,6 +61,18 @@ header h1 img {
 header h1 img:hover {
   opacity:1.0;
 }
+header h2 a:link,
+header h2 a:visited {
+  display:inline-block;
+  color:black;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+header h2 a:hover,
+header h2 a:active {
+  color:#333;
+  border-bottom: 2px solid black;
+}
 
 /* browse */
 header nav {
@@ -325,9 +337,20 @@ header nav .q {
 /* leaderboard */
 #main.leaderboard {
   margin:0 150px;
-  border: 1px solid red;
 }
-
+#main.leaderboard h1 {
+  margin-bottom:20px;
+}
+#main.leaderboard img {
+  max-width: 200px;
+}
+#main.leaderboard ul {
+  list-style-type: none;
+}
+#main.leaderboard li {
+  display:inline-block;
+  margin:0 20px 20px 0;
+}
 /* charts */
 #chart_div{
   width:200px;
