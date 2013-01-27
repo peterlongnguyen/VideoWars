@@ -13,18 +13,7 @@
 <header>
   <h1><a href="/"><img src="assets/img/video_wars_logo.png"></a></h1>
   <h2><?php echo $topic['name']; ?></h2>
-  <nav id="browse">
-    <ul>
-      <?php foreach($all_topics as $value) {?>
-      <li><a href="?topic=<?php echo $value['id']; ?>"><?php echo $value['name']; ?></a></li>
-      <?php } ?>
-      <li><a href="add_topic.php">More</a></li>
-    </ul>
-    <form class="search" action="">
-      <input class="q" type="text" placeholder="search" />
-    </form>
-  </nav>
-
+  <?php include('nav.php'); ?>
 </header>
 
 <div id="main">
