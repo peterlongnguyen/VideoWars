@@ -1,0 +1,124 @@
+/* global */
+
+body {
+  font-family: sans-serif;
+  background-color: yellow;
+}
+h1, h2, h3 {
+  font-family: 'Fjalla One', sans-serif;
+}
+
+/* browse */
+nav#browse {
+  background-color:#111;
+  color:#fff;
+}
+#browse ul,
+#browse li,
+#browse .search {
+  display:inline-block;
+}
+
+/* voting */
+#battle {
+  overflow:hidden;
+  text-align: center;
+}
+#battle article {
+  vertical-align:top;
+  border:1px solid red;
+  display:inline-block;
+  width:400px;
+  margin:0 20px;
+}
+#battle article:hover .actions {
+  display:block;
+}
+#battle ul.actions {
+  display:none;
+  list-style-type: none;
+}
+#battle ul,
+#battle li {
+  display:inline-block;
+}
+#battle .actions button {
+  display:inline-block;
+  padding:10px !important;
+}
+
+#battle .vote button {
+  display:inline-block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff;
+  padding: 10px 12px !important;
+  background: -moz-linear-gradient(
+         top,
+         #e53639 0%,
+         #c6302b 61%,
+         #701b1b);
+  background: -webkit-gradient(
+         linear, left top, left bottom, 
+         from(#e53639),
+         color-stop(0.61, #c6302b),
+         to(#701b1b));
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #ffffff;
+  -moz-box-shadow:
+         3px 2px 7px rgba(61,61,61,0.5),
+         inset 0px 0px 1px rgba(255,255,255,1);
+  -webkit-box-shadow:
+         3px 2px 7px rgba(61,61,61,0.5),
+         inset 0px 0px 1px rgba(255,255,255,1);
+  box-shadow:
+         3px 2px 7px rgba(61,61,61,0.5),
+         inset 0px 0px 1px rgba(255,255,255,1);
+  text-shadow:
+         1px 1px 0px rgba(000,000,000,0.7),
+         0px 1px 0px rgba(255,255,255,0.3);
+}
+
+
+#battle .vote button:hover{
+  background: -moz-linear-gradient(
+   top,
+   #751e1f 0%,
+   #c6302b 61%,
+   #701b1b);
+  background: -webkit-gradient(
+   linear, left top, left bottom, 
+   from(#751e1f),
+   color-stop(0.61, #c6302b),
+   to(#701b1b));
+}
+
+
+#battle .vote button:active{
+  background: -moz-linear-gradient(
+   top,
+   #571718 0%,
+   #c6302b 61%,
+   #4a1212);
+  background: -webkit-gradient(
+   linear, left top, left bottom, 
+   from(#571718),
+   color-stop(0.61, #c6302b),
+   to(#4a1212));
+}
+
+/* lists */
+
+/* footer */
+footer {
+  position:fixed;
+  bottom:0;
+  padding:10px;
+  width:100%;
+  border:1px solid red;
+  background-color:black;
+  color:#fff;
+}
