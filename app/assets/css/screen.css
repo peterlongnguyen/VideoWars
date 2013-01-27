@@ -111,11 +111,13 @@ header nav .q {
 
 /* voting */
 
-#battle {
+#main {
   overflow:hidden;
+}
+#main.battle {
   text-align: center;
 }
-#battle article {
+#main article {
   vertical-align:top;
   display:inline-block;
   width:550px;
@@ -124,7 +126,7 @@ header nav .q {
   overflow:visible;
 }
 
-#battle article:nth-child(2):after {
+#main article:nth-child(2):after {
   content:'vs';
   position:absolute;
   top:0;
@@ -136,24 +138,26 @@ header nav .q {
   width: 60px;
 }
 
-#battle article:hover .actions {
+#main article:hover .actions {
   display:block;
 }
 
 
-#battle ul.actions {
+#main ul.actions {
   display:none;
   list-style-type: none;
 }
-#battle ul,
-#battle li {
+#main ul,
+#main li {
   display:inline-block;
 }
 
-#battle .vote {
+#main .vote {
   margin-bottom: 10px;
 }
-#battle .vote button {
+#main .vote a:link,
+#main .vote a:visited {
+  text-decoration: none;
   display:inline-block;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 18px;
@@ -189,7 +193,7 @@ header nav .q {
 }
 
 
-#battle .vote button:hover{
+#main .vote a:hover{
   background: -moz-linear-gradient(
    top,
    #751e1f 0%,
@@ -203,7 +207,7 @@ header nav .q {
 }
 
 
-#battle .vote button:active{
+#main .vote a:active{
   background: -moz-linear-gradient(
    top,
    #571718 0%,
@@ -216,28 +220,42 @@ header nav .q {
    to(#4a1212));
 }
 
-#battle .actions a{
+#main .actions a{
   text-decoration: none;
 }
 
-#battle .actions .twitter i {
+#main .actions .twitter i {
   color: #23C4F3;
 }
 
-#battle .actions .facebook i {
+#main .actions .facebook i {
   color: #3B5998;
 }
 
-#battle .actions .flag i {
+#main .actions .flag i {
   color: #EF4036;
 }
 
-#battle .actions .fave i {
+#main .actions .fave i {
   color: #EC008B;
 }
 
-#battle .actions .link i {
+#main .actions .link i {
   color: #58585B;
+}
+
+/* vid permalink */
+#main.permalink {
+  margin-top:25px;
+  margin-bottom:80px;
+  margin-left:120px;
+}
+
+#main.permalink .actions {
+  margin-top:20px;
+}
+#main.permalink article {
+  width:auto;
 }
 
 /* lists */
