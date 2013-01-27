@@ -46,7 +46,9 @@ nav#browse {
   display:inline-block;
   padding:10px !important;
 }
-
+#battle .vote {
+  margin-bottom: 10px;
+}
 #battle .vote button {
   display:inline-block;
   font-family: Arial, Helvetica, sans-serif;
@@ -108,6 +110,33 @@ nav#browse {
    from(#571718),
    color-stop(0.61, #c6302b),
    to(#4a1212));
+}
+#battle .actions button {
+  background: transparent;
+  border:0;
+}
+#battle .actions button:hover {
+  background:rgba(255, 255, 255,0.4);
+  border-radius: 5px;
+}
+#battle .actions .twitter i {
+  color: #23C4F3;
+}
+
+#battle .actions .facebook i {
+  color: #3B5998;
+}
+
+#battle .actions .flag i {
+  color: #EF4036;
+}
+
+#battle .actions .fave i {
+  color: #EC008B;
+}
+
+#battle .actions .link i {
+  color: #58585B;
 }
 
 /* lists */
