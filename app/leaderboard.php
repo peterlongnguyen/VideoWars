@@ -29,13 +29,13 @@ foreach ($top_videos as $key => $video) {
 <title>VIDEO WARS</title>
 <link rel="stylesheet" type="text/css" href="http://reset5.googlecode.com/hg/reset.min.css">
 <link href="http://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="/assets/css/screen.css">
-<link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="assets/css/screen.css">
+<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
 
 </head>
 <body>
 <header>
-  <h1><a href="/"><img src="/assets/img/video_wars_logo.png"></a></h1>
+  <h1><a href="/"><img src="assets/img/video_wars_logo.png"></a></h1>
   <h2><?php echo $topic['name']; ?></h2>
   <nav id="browse">
     <ul>
