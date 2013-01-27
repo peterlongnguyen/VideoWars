@@ -94,7 +94,7 @@ if (array_key_exists("topic", $_GET) && is_numeric($_GET["topic"])) {
 <?php foreach ($videos as $video) { ?>
   <article>
     <div class="video">
-      <iframe width="550" height="350" src="http://www.youtube.com/embed/<?php echo $video['youtube_id']; ?>" frameborder="0" allowfullscreen></iframe>
+      <iframe width="530" height="298" src="http://www.youtube.com/embed/<?php echo $video['youtube_id']; ?>" frameborder="0" allowfullscreen></iframe>
     </div>
     <div class="vote"><a href="<?php echo $video['vote_url'] ?>">vote!</a></div>
     <ul class="actions">

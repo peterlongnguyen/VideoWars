@@ -71,7 +71,7 @@ $all_topics = db_fetch("SELECT COUNT(topics.id) AS count, topics.id, topics.name
 <div id="main" class="permalink">
   <article>
     <div class="video">
-      <iframe width="550" height="350" src="http://www.youtube.com/embed/<?php echo $video['youtube_id']; ?>" frameborder="0" allowfullscreen></iframe>
+      <iframe width="530" height="298" src="http://www.youtube.com/embed/<?php echo $video['youtube_id']; ?>" frameborder="0" allowfullscreen></iframe>
       <ul class="actions">
         <li class="twitter"> <a href="#" title="Twitter"><i class="icon-twitter"></i></a></li>
         <li class="facebook"> <a href="#" title="Facebook"><i class="icon-facebook-sign"></i></a></li>
