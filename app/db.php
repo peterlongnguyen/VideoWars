@@ -15,9 +15,23 @@ function db_fetch($statement, $args=array(), $fetch_one = False)
         $db = null;
         return $result;
     } catch (PDOException $e) {
-        print "Error!: " . $e->getMessage() . "<br/>";
+        print "Error!: " . $e->getMessage() . "<br />";
         die();
     }
+}
+
+function db_insert($statement, $args=array())
+{
+
+    try {
+        $db = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
+        $sql = $db->prepare($statement);
+        $sql->execute($args);
+    } catch (PDOException $e) {
+        print "Error!: " . $e->getMessage() . "<br />";
+        die();
+    }
+
 }
 
 ?>
