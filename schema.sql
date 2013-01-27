@@ -35,7 +35,7 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `timestamp`) VALUES
-(1, 'Awe', '2013-01-27 00:17:04'),
+(1, 'Aww', '2013-01-27 00:17:04'),
 (2, 'Sports', '2013-01-27 00:17:04'),
 (3, 'Fail', '2013-01-27 00:17:04'),
 (4, 'Comedy', '2013-01-27 00:17:04'),
