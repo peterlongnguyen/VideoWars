@@ -22,6 +22,7 @@ if (array_key_exists("topic", $_GET) && is_numeric($_GET["topic"])) {
 }
 
 db_insert("INSERT INTO votes (win_video_id, lose_video_id) VALUES(?, ?)", array($video_id_win, $video_id_lose));
+db_insert("UPDATE videos SET votes = votes + 1 WHERE id = ?", array($video_id_win));
 
 //echo $video_id_win . $video_id_lose . $topic_id;
 

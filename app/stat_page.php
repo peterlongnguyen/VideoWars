@@ -3,29 +3,26 @@
 require_once("config.php");
 require_once("db.php");
 
-//$video_id = $_GET["video_id"];
-$video_id = 1;
+$video_id = $_GET["video_id"];
+//$video_id = 1;
 
 // video stat page
-$wins = db_fetch("SELECT COUNT(votes.win_video_id) AS wins, votes.win_video_id, videos.name, videos.youtube_id FROM votes JOIN videos ON votes.win_video_id = videos.id JOIN views ON votes.win_video_id = views.video_id WHERE views.video_id = ?", array($video_id));
-$losses = db_fetch("SELECT COUNT(votes.lose_video_id) AS losses, votes.lose_video_id, videos.name, videos.youtube_id FROM votes JOIN videos ON votes.lose_video_id = videos.id JOIN views ON votes.lose_video_id = views.video_id WHERE views.video_id = ?", array($video_id));
+$video = db_fetch("SELECT * FROM videos WHERE id = ?", array($video_id), True);
+echo "<pre>"; print_r($video); echo "<pre>";
+
+$wins = db_fetch("SELECT COUNT(*) AS wins FROM votes WHERE win_video_id = ?", array($video_id), True);
+$losses = db_fetch("SELECT COUNT(*) AS losses FROM votes WHERE lose_video_id = ?", array($video_id), True);
 
 
 echo("<b>Video Stat Page for video: </b>" . $video_id);
 echo("<br />");
 echo("<br />");
 
-echo("<b>Wins for: </b>" . $video_id);
-foreach ($wins as $key => $value) {
-	echo("<br />");
-	echo "<pre>"; print_r($wins[$key]); echo "<pre>";
-}
+echo "Wins: " . $wins["wins"];
+echo "<br />";
 
-echo("<b>Losses for: </b>" . $video_id);
-foreach ($losses as $key => $value) {
-	echo("<br />");
-	echo "<pre>"; print_r($losses[$key]); echo "<pre>";
-}
+echo "Losses: " . $losses["losses"];
+echo "<br />";
 
 // video battle history
 $wins = db_fetch("SELECT votes.win_video_id, votes.lose_video_id, votes.timestamp, videos.youtube_id FROM votes JOIN videos ON votes.lose_video_id = videos.id  WHERE votes.win_video_id = ?", array($video_id));

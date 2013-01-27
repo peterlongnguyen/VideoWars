@@ -5,6 +5,8 @@ require_once("db.php");
 
 echo "Home Page<br /><br />";
 
+echo "<a href='add_topic.php'>+ Add Topic</a><br /><br />";
+
 if (array_key_exists("topic", $_GET) && is_numeric($_GET["topic"])) {
     //Topic id has been set
     $topic_id = $_GET["topic"];
@@ -21,8 +23,8 @@ if (array_key_exists("topic", $_GET) && is_numeric($_GET["topic"])) {
     $topic = $topics[$topic_key];
 }
 
-echo "Topic:";
-echo "<pre>"; print_r($topic); echo "</pre>";
+echo "Topic: <a href='leaderboard.php?topic=" . $topic["id"] . "'>" . $topic["name"] . "</a><br /><br />";
+//echo "<pre>"; print_r($topic); echo "</pre>";
 
 $videos = db_fetch("SELECT * FROM videos WHERE topic_id = ?", array($topic["id"]));
 $video_keys = array_rand($videos, 2);
@@ -34,7 +36,12 @@ echo "<pre>"; print_r($video_1); echo "</pre>";
 echo "<pre>"; print_r($video_2); echo "</pre>";
 
 echo "<a href='vote.php?win=" . $video_1["id"] . "&lose=" . $video_2["id"] . "&topic=" . $topic["id"] . "'>Vote (" . $video_1["name"] . ")</a><br />";
+echo "<a href='stat_page.php?video_id=" . $video_1["id"] . "'>Video Page</a>";
+echo "<br /><br />";
+
 echo "<a href='vote.php?win=" . $video_2["id"] . "&lose=" . $video_1["id"] . "&topic=" . $topic["id"] . "'>Vote (" . $video_2["name"] . ")</a><br />";
+echo "<a href='stat_page.php?video_id=" . $video_2["id"] . "'>Video Page</a>";
+echo "<br />";
 
 if (array_key_exists("topic", $_GET) && is_numeric($_GET["topic"])) {
     $topics = db_fetch("SELECT COUNT(topics.id) AS count, topics.id, topics.name FROM topics JOIN videos ON videos.topic_id = topics.id GROUP BY topics.id");
