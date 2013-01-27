@@ -4,7 +4,6 @@ body {
   font-family: sans-serif;
   background: #f0f0f0 url('/assets/img/bg_debut_light.png') 0 0 repeat;
   min-width:1200px;
-  padding-top:180px;
   padding-bottom:70px;
 
 }
@@ -45,17 +44,13 @@ h3{
 
 /* top */
 header {
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
   padding:5px;
   margin-top: 25px;
   border-top: 10px solid black;
   border-bottom: 10px solid black;
   background: rgba(255, 255, 255, 0.8);
   overflow: hidden;
-  z-index:5;
+  margin-bottom:15px;
 }
 header h1 {
   float:left;
@@ -135,6 +130,7 @@ header nav .q {
 
 #main {
   overflow:hidden;
+  min-height:550px;
 }
 #main.battle {
   text-align: center;
@@ -390,10 +386,87 @@ header nav .q {
   text-transform: uppercase;
   font-size: 24px;
 }
+/* add form */
+#main.add_form {
+  margin-left:150px;
+}
+#main.add_form h1 {
+  margin-bottom:15px;
+}
+#main.add_form #advanced {
+  display:none;
+}
+
+
+#main.add_form input[type="submit"] {
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 16px;
+  color: #c6302b;
+  padding: 10px 20px !important;
+  background: -moz-linear-gradient(
+    top,
+    #f5f5f5 0%,
+    #ffffff 50%,
+    #ebebeb);
+  background: -webkit-gradient(
+    linear, left top, left bottom, 
+    from(#f5f5f5),
+    color-stop(0.50, #ffffff),
+    to(#ebebeb));
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  border: 0px solid #000000;
+  -moz-box-shadow:
+    0px 1px 3px rgba(000,000,000,0.5),
+    inset 0px 0px 1px rgba(255,255,255,0.7);
+  -webkit-box-shadow:
+    0px 1px 3px rgba(000,000,000,0.5),
+    inset 0px 0px 1px rgba(255,255,255,0.7);
+  box-shadow:
+    0px 1px 3px rgba(000,000,000,0.5),
+    inset 0px 0px 1px rgba(255,255,255,0.7);
+  text-shadow:
+    0px -1px 0px rgba(000,000,000,0.4),
+    0px 1px 0px rgba(255,255,255,0.3);
+}
+
+#main.add_form input[type="submit"]:hover {
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 16px;
+  color: #c6302b;
+  padding: 10px 20px;
+  background: -moz-linear-gradient(
+    top,
+    #b5b5b5 0%,
+    #ffffff 50%,
+    #b5b5b5);
+  background: -webkit-gradient(
+    linear, left top, left bottom, 
+    from(#b5b5b5),
+    color-stop(0.50, #ffffff),
+    to(#b5b5b5));
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  border: 0px solid #000000;
+  -moz-box-shadow:
+    0px 1px 3px rgba(000,000,000,0.5),
+    inset 0px 0px 1px rgba(255,255,255,0.7);
+  -webkit-box-shadow:
+    0px 1px 3px rgba(000,000,000,0.5),
+    inset 0px 0px 1px rgba(255,255,255,0.7);
+  box-shadow:
+    0px 1px 3px rgba(000,000,000,0.5),
+    inset 0px 0px 1px rgba(255,255,255,0.7);
+  text-shadow:
+    0px -1px 0px rgba(000,000,000,0.4),
+    0px 1px 0px rgba(255,255,255,0.3);
+}
+
+
 /* footer */
 footer {
-  position:fixed;
-  bottom:0;
   padding:10px 0;
   width:100%;
   border-top: 10px solid black;
