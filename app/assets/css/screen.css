@@ -5,6 +5,7 @@ body {
   background: #f0f0f0 url('/assets/img/bg_debut_light.png') 0 0 repeat;
   min-width:1200px;
   padding-top:180px;
+  padding-bottom:70px;
 
 }
 h1 {
@@ -323,6 +324,12 @@ header nav .q {
 #main.permalink #total_score strong{
   color: #C6312B;
   font-size: 60px;
+}
+
+/* leaderboard */
+#main.leaderboard {
+  margin:0 150px;
+  border: 1px solid red;
 }
 
 /* charts */

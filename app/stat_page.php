@@ -55,7 +55,7 @@ $all_topics = db_fetch("SELECT COUNT(topics.id) AS count, topics.id, topics.name
 <body>
 <header>
   <h1><a href="/"><img src="/assets/img/video_wars_logo.png"></a></h1>
-  <h2><?php print_r($topic['name']); ?></h2>
+  <h2><?php echo $topic['name']; ?></h2>
   <nav id="browse">
     <ul>
       <?php foreach($all_topics as $value) {?>
