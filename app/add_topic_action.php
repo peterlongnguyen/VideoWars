@@ -2,35 +2,47 @@
 
 require_once("config.php");
 require_once("db.php");
+require_once("yt_data_api.php");
+
+/*
+if (array_key_exists("keyword", $_GET) && $_GET["keyword"]) { $keyword = $_GET["keyword"]; } else { $keyword = ""; }
+if (array_key_exists("category", $_GET) && $_GET["category"]) { $category = $_GET["category"]; } else { $category_id = 0; }
+if (array_key_exists("skips", $_GET) && $_GET["skips"]) { $allow_skips = $_GET["skips"]; } else { $allow_skips = 1; }
+if (array_key_exists("additions", $_GET) && $_GET["additions"]) { $allow_additions = $_GET["additions"]; } else {$allow_additions = 1; }
+if (array_key_exists("leaderboard", $_GET) && $_GET["leaderboard"]) { $allow_leaderboard = $_GET["leaderboard"]; } else { $allow_leaderboard = 1; }
+if (array_key_exists("visibility", $_GET) && $_GET["visibility"]) { $visibility = $_GET["visibility"]; } else { $visibility = 1; }
+if (array_key_exists("url", $_GET) && $_GET["url"]) { $youtube_url = $_GET["url"]; } else { $youtube_url = ""; }
+*/
 
 $keyword = $_GET["keyword"];
-//echo "Keywords: " . $keyword;
-//echo "<br /><br />";
+$name = $_GET["name"];
+$category = $_GET["category"];
+$allow_skips = $_GET["skips"];
+$allow_additions = $_GET["additions"];
+$allow_leaderboard = $_GET["leaderboard"];
+$visibility = $_GET["visibility"];
+$youtube_url = $_GET["url"];
+if (!$name) $name = $keyword;
 
-$url = "https://www.googleapis.com/youtube/v3/search?part=id%2Csnippet&maxResults=50&q=" . urlencode($keyword) . "&key=" . API_KEY;
-//echo $url;
-//echo "<br /><br />";
+if ($keyword) {
+    echo "keyword";
+    $videos = yt_keyword($keyword);
+} elseif (preg_match("/playlist/", $youtube_url)) {
+    $videos = yt_playlist($youtube_url);
+} elseif (preg_match("/user/", $youtube_url)) {
+    $videos = yt_channel($youtube_url);
+} else {
+    die("Invalid URL");
+}
 
-$ch = curl_init(); 
-curl_setopt($ch, CURLOPT_URL, $url); 
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-$results = curl_exec($ch); 
-curl_close($ch); 
+// Insert new topic
+$topic_args = array($name, $category, $allow_skips, $allow_additions, $allow_leaderboard, $visibility);
+$test = db_insert("INSERT INTO topics (name, category_id, allow_skips, allow_additions, allow_leaderboard, visibility) VALUES (?, ?, ?, ?, ?, ?)", $topic_args, True);
+$new_topic = db_fetch("SELECT id FROM topics WHERE name = ? ORDER BY created DESC LIMIT 1", array($name), True);
 
-$category_id = 0;
-$allow_skips = 1;
-$allow_additions = 1;
-$allow_leaderboard = 1;
-$visibility = 1;
-
-$topic_args = array($keyword, $category_id, $allow_skips, $allow_additions, $allow_leaderboard, $visibility);
-db_insert("INSERT INTO topics (name, category_id, allow_skips, allow_additions, allow_leaderboard, visibility) VALUES (?, ?, ?, ?, ?, ?)", $topic_args, True);
-$new_topic = db_fetch("SELECT id FROM topics WHERE name = ? ORDER BY created DESC LIMIT 1", array($keyword), True);
-
-if ($results) {
-    $videos = json_decode($results);
-    foreach ($videos->items as $video) {
-        $db_args = array($video->id->videoId, $new_topic["id"], $video->snippet->title);
+if ($videos) {
+    foreach ($videos as $video) {
+        $db_args = array($video["id"], $new_topic["id"], $video["title"]);
         db_insert("INSERT INTO videos (youtube_id, topic_id, name) VALUES (?, ?, ?);", $db_args);
     }
 

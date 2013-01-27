@@ -73,9 +73,9 @@ if (array_key_exists("topic", $_GET) && is_numeric($_GET["topic"])) {
   <nav id="browse">
     <ul>
       <?php foreach($all_topics as $value) {?>
-      <li><a href="/?topic=<?php echo $value['id']; ?>"><?php echo $value['name']; ?></a></li>
+      <li><a href="?topic=<?php echo $value['id']; ?>"><?php echo $value['name']; ?></a></li>
       <?php } ?>
-      <li><a href="/add_topic.php">More</a></li>
+      <li><a href="add_topic.php">More</a></li>
     </ul>
     <form class="search" action="">
       <input class="q" type="text" placeholder="search" />

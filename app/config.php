@@ -2,6 +2,8 @@
 
 require_once('db_conn.php');
 
+error_reporting(0);
+
 define("DB_HOST", $db_host);
 define("DB_NAME", $db_name);
 define("DB_USER", $db_user);
