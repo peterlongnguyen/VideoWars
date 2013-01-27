@@ -25,7 +25,6 @@ $youtube_url = $_GET["url"];
 if (!$name) $name = $keyword;
 
 if ($keyword) {
-    echo "keyword";
     $videos = yt_keyword($keyword);
 } elseif (preg_match("/playlist/", $youtube_url)) {
     $videos = yt_playlist($youtube_url);
