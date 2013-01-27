@@ -59,20 +59,8 @@ CREATE TABLE `videos` (
   `topic_id` int(10) unsigned NOT NULL,
   `name` varchar(512) NOT NULL,
   `votes` int(10) unsigned NOT NULL DEFAULT '0',
+  `views` int(10) unsigned NOT NULL DEFAULT '0',
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `views`
---
-
-CREATE TABLE `views` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `video_id` int(10) unsigned NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -90,3 +78,10 @@ CREATE TABLE `votes` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
+
+--
+-- Data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `timestamp`) VALUES (NULL, 'Uncategorized', CURRENT_TIMESTAMP), (NULL, 'Art & Design', CURRENT_TIMESTAMP), (NULL, 'Animals', CURRENT_TIMESTAMP), (NULL, 'Cars', CURRENT_TIMESTAMP), (NULL, 'Celebrities', CURRENT_TIMESTAMP), (NULL, 'Comedy', CURRENT_TIMESTAMP), (NULL, 'Commercials', CURRENT_TIMESTAMP), (NULL, 'Education', CURRENT_TIMESTAMP), (NULL, 'Family', CURRENT_TIMESTAMP), (NULL, 'Fashion', CURRENT_TIMESTAMP), (NULL, 'Food & Fitness', CURRENT_TIMESTAMP), (NULL, 'Gaming', CURRENT_TIMESTAMP), (NULL, 'Life Hacks', CURRENT_TIMESTAMP), (NULL, 'Movies & Film', CURRENT_TIMESTAMP), (NULL, 'Nature', CURRENT_TIMESTAMP), (NULL, 'News', CURRENT_TIMESTAMP), (NULL, 'Science', CURRENT_TIMESTAMP), (NULL, 'Sports', CURRENT_TIMESTAMP), (NULL, 'Technology', CURRENT_TIMESTAMP), (NULL, 'WTF', CURRENT_TIMESTAMP);
