@@ -3,9 +3,8 @@
 require_once("config.php");
 require_once("db.php");
 
-echo "Home Page<br /><br />";
 
-echo "<a href='add_topic.php'>+ Add Topic</a><br /><br />";
+// echo "<a href='add_topic.php'>+ Add Topic</a><br /><br />";
 
 if (array_key_exists("topic", $_GET) && is_numeric($_GET["topic"])) {
     //Topic id has been set
@@ -23,38 +22,94 @@ if (array_key_exists("topic", $_GET) && is_numeric($_GET["topic"])) {
     $topic = $topics[$topic_key];
 }
 
-echo "Topic: <a href='leaderboard.php?topic=" . $topic["id"] . "'>" . $topic["name"] . "</a><br /><br />";
-//echo "<pre>"; print_r($topic); echo "</pre>";
+$all_topics = db_fetch("SELECT COUNT(topics.id) AS count, topics.id, topics.name FROM topics JOIN videos ON videos.topic_id = topics.id GROUP BY topics.id");
+
+// echo "<pre>"; print_r($topic); echo "</pre>";
+
+$topic_leaderboard_url = "/leaderboard.php?topic=" . $topic["id"];
+// echo "<pre>"; echo ($topic_leaderboard_url); echo "</pre>";
 
 $videos = db_fetch("SELECT * FROM videos WHERE topic_id = ?", array($topic["id"]));
 $video_keys = array_rand($videos, 2);
 $video_1 = $videos[$video_keys[0]];
 $video_2 = $videos[$video_keys[1]];
+$video_1["vote_url"] = "/vote.php?win=" . $video_1["id"] . "&lose=" . $video_2["id"] . "&topic=" . $topic["id"];
+$video_1["permalink_url"] = "/stat_page.php?video_id=" . $video_1["id"];
+$video_2["vote_url"] = "/vote.php?win=" . $video_2["id"] . "&lose=" . $video_1["id"] . "&topic=" . $topic["id"];
+$video_2["permalink_url"] =  "/stat_page.php?video_id=" . $video_2["id"];
 
-echo "Videos:";
-echo "<pre>"; print_r($video_1); echo "</pre>";
-echo "<pre>"; print_r($video_2); echo "</pre>";
-
-echo "<a href='vote.php?win=" . $video_1["id"] . "&lose=" . $video_2["id"] . "&topic=" . $topic["id"] . "'>Vote (" . $video_1["name"] . ")</a><br />";
-echo "<a href='stat_page.php?video_id=" . $video_1["id"] . "'>Video Page</a>";
-echo "<br /><br />";
-
-echo "<a href='vote.php?win=" . $video_2["id"] . "&lose=" . $video_1["id"] . "&topic=" . $topic["id"] . "'>Vote (" . $video_2["name"] . ")</a><br />";
-echo "<a href='stat_page.php?video_id=" . $video_2["id"] . "'>Video Page</a>";
-echo "<br />";
+$videos = array();
+array_push($videos, $video_1, $video_2);
 
 if (array_key_exists("topic", $_GET) && is_numeric($_GET["topic"])) {
     $topics = db_fetch("SELECT COUNT(topics.id) AS count, topics.id, topics.name FROM topics JOIN videos ON videos.topic_id = topics.id GROUP BY topics.id");
-    foreach ($topics as $key => $topic) {
-        if ($topic["count"] <= CONFIG_MIN_VIDEO_COUNT) unset($topics[$key]);
-        if ($topic["id"] == $topic_id) unset($topics[$key]);
+    foreach ($topics as $key => $value) {
+        if ($value["count"] <= CONFIG_MIN_VIDEO_COUNT) unset($topics[$key]);
+        if ($value["id"] == $topic_id) unset($topics[$key]);
     }
 } else {
     unset($topics[$topic_key]);
 }
-echo "<br />";
-echo "Random Topics:<br />";
-foreach ($topics as $topic) {
-    echo "<a href='?topic=" . $topic["id"] . "'>" . $topic["name"] . "</a><br />";
-}
+// echo "Random Topics:<br />";
+// foreach ($topics as $value) {
+//     echo "<a href='?topic=" . $value["id"] . "'>" . $value["name"] . "</a><br />";
+// }
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>VIDEO WARS</title>
+<link rel="stylesheet" type="text/css" href="http://reset5.googlecode.com/hg/reset.min.css">
+<link href="http://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/assets/css/screen.css">
+<link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.min.css">
+
+</head>
+<body>
+<header>
+  <h1><a href="/"><img src="/assets/img/video_wars_logo.png"></a></h1>
+  <h2><?php print_r($topic['name']); ?></h2>
+  <nav id="browse">
+    <ul>
+      <?php foreach($all_topics as $value) {?>
+      <li><a href="/?topic=<?php echo $value['id']; ?>"><?php echo $value['name']; ?></a></li>
+      <?php } ?>
+      <li><a href="/add_topic.php">More</a></li>
+    </ul>
+    <form class="search" action="">
+      <input class="q" type="text" placeholder="search" />
+    </form>
+  </nav>
+
+</header>
+
+<div id="main" class="battle">
+  <h3>
+    <strong>
+    Who does it better? <br>
+    </strong>
+    You decide.
+  </h3>
+<?php foreach ($videos as $video) { ?>
+  <article>
+    <div class="video">
+      <iframe width="550" height="350" src="http://www.youtube.com/embed/<?php echo $video['youtube_id']; ?>" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="vote"><a href="<?php echo $video['vote_url'] ?>">vote!</a></div>
+    <ul class="actions">
+      <li class="twitter"> <a href="#" title="Twitter"><i class="icon-twitter"></i></a></li>
+      <li class="facebook"> <a href="#" title="Facebook"><i class="icon-facebook-sign"></i></a></li>
+      <li class="fave"> <a href="#" title="Favorite"><i class="icon-heart-empty"></i></a></li>
+      <li class="link"> <a href="<?php echo $video['permalink_url'] ?>" title="Permalink"><i class="icon-link"></i></a></li>
+      <li class="flag"> <a href="#" title="Flag as Inappropriate"><i class="icon-flag"></i></a></li>
+    </ul>
+  </article>
+<?php } ?>
+</div>
+<footer>
+  +
+</footer>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+</body>
+</html>
