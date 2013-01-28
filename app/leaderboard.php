@@ -36,7 +36,7 @@ $top_videos = db_fetch("SELECT COUNT(*) AS loses, videos.* FROM votes JOIN video
   <ul>
 <?php foreach ($top_videos as $key => $video) { ?>
     <li>
-      <a href="stats_page.php?video_id=<?php echo $video['id']?>">
+      <a href="stat_page.php?video_id=<?php echo $video['id']?>">
         <img src="http://i4.ytimg.com/vi/<?php echo $video['youtube_id'] ?>/mqdefault.jpg" alt="">
       </a>
     </li>

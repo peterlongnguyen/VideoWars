@@ -73,7 +73,7 @@ $all_topics = db_fetch("SELECT COUNT(topics.id) AS count, topics.id, topics.name
     <div class="info">
       <h1><?php echo $video['name'] ?></h1>
       <div id="chart_div"></div>
-      <div id="total_score"><strong><?php echo $total_score ?></strong><br>Total Score</div>
+      <div id="total_score"><strong><?php echo round($total_score) ?></strong><br>Total Score</div>
     </div>
   </article>
     <section class="records">
