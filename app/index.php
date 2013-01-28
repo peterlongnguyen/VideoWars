@@ -91,7 +91,7 @@ if (array_key_exists("topic", $_GET) && is_numeric($_GET["topic"])) {
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
   </script>
 
-  <article>
+  <article class="vid1">
     <div class="video">
     
     <div id="player1" frameborder="0" allowfullscreen></div>
@@ -144,7 +144,7 @@ if (array_key_exists("topic", $_GET) && is_numeric($_GET["topic"])) {
 
 
 
-  <article>
+  <article class="vid2">
     <div class="video">
       
       <div id="player2" frameborder="0" allowfullscreen></div>

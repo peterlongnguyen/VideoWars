@@ -182,11 +182,11 @@ header nav .q {
   position:absolute;
   bottom:200px;
 }
-#main article:nth-child(2) .actions {
-  left:-30px;
+#main .vid1 .actions {
+  left:-30px !important;
 }
-#main article:nth-child(3) .actions {
-  right:-30px;
+#main .vid2 .actions {
+  right:-30px !important;
 }
 
 
